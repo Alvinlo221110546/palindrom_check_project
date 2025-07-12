@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:io'; // Untuk deteksi platform selain web
-import 'package:flutter/foundation.dart'; // Untuk kIsWeb
+import 'dart:io' show Platform; 
+import 'package:flutter/foundation.dart'; 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../models/user.dart';
@@ -42,15 +42,13 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      // Default endpoint
-      String baseUrl = 'https://reqres.in/api/users?page=$_currentPage&per_page=10';
+      //URL utama
+      String apiUrl = 'https://reqres.in/api/users?page=$_currentPage&per_page=10';
 
-      // 🔁 Gunakan proxy bypass jika dijalankan di web
+      //Jika di web, gunakan proxy anti-CORS
+      String baseUrl = apiUrl;
       if (kIsWeb) {
-        baseUrl =
-            'https://cors-anywhere.herokuapp.com/https://reqres.in/api/users?page=$_currentPage&per_page=10';
-        // ❗ Jika sudah dites, comment baris di atas & aktifkan baris bawah untuk akses normal
-        // baseUrl = 'https://reqres.in/api/users?page=$_currentPage&per_page=10';
+        baseUrl = 'https://api.allorigins.win/raw?url=$apiUrl';
       }
 
       final response = await http.get(Uri.parse(baseUrl));
@@ -72,10 +70,10 @@ class UserProvider extends ChangeNotifier {
         _hasMore = _currentPage < data['total_pages'];
         _currentPage++;
       } else {
-        print('❌ Gagal fetch data: ${response.statusCode}');
+        print('Gagal fetch data: ${response.statusCode}');
       }
     } catch (e) {
-      print('❌ Exception saat fetch users: $e');
+      print('Exception saat fetch users: $e');
     } finally {
       _isLoading = false;
       notifyListeners();

@@ -30,7 +30,7 @@ class SecondScreen extends StatelessWidget {
               children: [
                 Text(
                   'Welcome',
-                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                  style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 78, 77, 77)),
                 ),
                 SizedBox(height: 8),
                 Text(

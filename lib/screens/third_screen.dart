@@ -50,12 +50,16 @@ class _ThirdScreenState extends State<ThirdScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Third Screen',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Colors.black, 
+            fontWeight: FontWeight.w600,
+            fontSize: 17,
+          ),
         ),
         centerTitle: true,
       ),
@@ -90,7 +94,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
             onRefresh: _onRefresh,
             child: ListView.builder(
               controller: _scrollController,
-              padding: EdgeInsets.all(16),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               itemCount: userProvider.users.length + (userProvider.hasMore ? 1 : 0),
               itemBuilder: (context, index) {
                 if (index >= userProvider.users.length) {
@@ -102,26 +106,41 @@ class _ThirdScreenState extends State<ThirdScreen> {
                 }
 
                 final user = userProvider.users[index];
-                return Card(
-                  margin: EdgeInsets.only(bottom: 12),
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border(
+                      bottom: BorderSide(
+                        color: Colors.grey.shade200,
+                        width: 1,
+                      ),
+                    ),
                   ),
                   child: ListTile(
-                    contentPadding: EdgeInsets.all(16),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     leading: CircleAvatar(
-                      radius: 30,
+                      radius: 25,
                       backgroundImage: NetworkImage(user.avatar),
                       backgroundColor: Colors.grey[300],
                     ),
                     title: Text(
                       user.fullName,
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
                     ),
-                    subtitle: Text(
-                      user.email,
-                      style: TextStyle(color: Colors.grey[600]),
+                    subtitle: Padding(
+                      padding: EdgeInsets.only(top: 4),
+                      child: Text(
+                        user.email.toUpperCase(),
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
                     ),
                     onTap: () {
                       userProvider.setSelectedUserName(user.fullName);

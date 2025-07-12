@@ -23,7 +23,7 @@ class _FirstScreenState extends State<FirstScreen> {
   void _checkPalindrome() {
     String text = _palindromeController.text;
     bool isPalindrome = PalindromeChecker.isPalindrome(text);
-    
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -49,8 +49,9 @@ class _FirstScreenState extends State<FirstScreen> {
       return;
     }
 
-    Provider.of<UserProvider>(context, listen: false).setUserName(_nameController.text);
-    
+    Provider.of<UserProvider>(context, listen: false)
+        .setUserName(_nameController.text);
+
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => SecondScreen()),
@@ -62,14 +63,9 @@ class _FirstScreenState extends State<FirstScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF4DD0E1),
-              Color(0xFF26C6DA),
-              Color(0xFF00ACC1),
-            ],
+          image: DecorationImage(
+            image: AssetImage('assets/background.png'),
+            fit: BoxFit.cover,
           ),
         ),
         child: SafeArea(
@@ -78,7 +74,7 @@ class _FirstScreenState extends State<FirstScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Main circle avatar
+                // Circle avatar
                 Container(
                   margin: EdgeInsets.only(bottom: 40),
                   child: CircleAvatar(
@@ -91,7 +87,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     ),
                   ),
                 ),
-                
+
                 // Name input
                 Container(
                   margin: EdgeInsets.only(bottom: 16),
@@ -105,11 +101,12 @@ class _FirstScreenState extends State<FirstScreen> {
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide.none,
                       ),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
                     ),
                   ),
                 ),
-                
+
                 // Palindrome input
                 Container(
                   margin: EdgeInsets.only(bottom: 24),
@@ -123,11 +120,12 @@ class _FirstScreenState extends State<FirstScreen> {
                         borderRadius: BorderRadius.circular(12),
                         borderSide: BorderSide.none,
                       ),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
                     ),
                   ),
                 ),
-                
+
                 // Check button
                 Container(
                   width: double.infinity,
@@ -142,10 +140,12 @@ class _FirstScreenState extends State<FirstScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: Text('CHECK', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    child: Text('CHECK',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
                   ),
                 ),
-                
+
                 // Next button
                 Container(
                   width: double.infinity,
@@ -159,7 +159,9 @@ class _FirstScreenState extends State<FirstScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: Text('NEXT', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    child: Text('NEXT',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],
