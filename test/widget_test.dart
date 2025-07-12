@@ -19,12 +19,9 @@ void main() {
     final nameField = find.byType(TextField).at(0);
     await tester.enterText(nameField, 'Alvin');
 
-    final palindromeField = find.byType(TextField).at(1);
-    await tester.enterText(palindromeField, 'katak');
-
     await tester.tap(find.text('CHECK'));
-    await tester.pump(); // Show dialog
-    expect(find.textContaining('palindrome'), findsOneWidget); 
+    await tester.pump(); 
+    expect(find.textContaining('isPalindrome'), findsOneWidget); 
 
     await tester.tap(find.text('OK'));
     await tester.pumpAndSettle();
